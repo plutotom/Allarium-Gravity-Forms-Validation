@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Gravity Forms Validation - Allarium
-Plugin URI: 
+Plugin URI: https://github.com/plutotom/Allarium-Gravity-Forms-Validation
 Description: Checks for gravity forms fields to have unique values.
 Version: 1.0
 Author: Allarium
@@ -14,8 +14,6 @@ Text Domain: Gravity Forms Validation
 
 // Allarium-Gravity-Form-Validation
 class AGFVValidationCheck {
-    
-
     public function __construct( $args = array() ) {
 		$this->_args = wp_parse_args( $args, array(
 			'form_id'             => false,
