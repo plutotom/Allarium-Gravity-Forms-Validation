@@ -23,29 +23,41 @@ class AGFVValidationCheck {
 	}
 
 	public function init() {
-		add_filter( sprintf( 'gform_field_validation_%s', $this->_args['form_id'] ), array( $this, 'AGFVvalidationCheck' ),10 , 4 );
-
+        $this->AGFVvalidationCheck();
 	}
-    // Function to check if there are duplicates in an array.
-    public function AGFVhas_duplicates( $array ) {
-        return count( array_keys( array_flip($array))) == count( $array );
+
+    public function find_duplicates ($input){
+        $unique = array_unique($input);
+        $duplicates_values = array_diff_assoc($input, $unique);
+        return $duplicates_values;
     }
 
-    public function AGFVvalidationCheck($result, $value, $form, $field){
+    public function AGFVvalidationCheck(){
         // Gets current selected form entries.
         $entry = GFFormsModel::get_current_lead();
         // The id of each field in group one.
-
         for ($i = 0; $i < count($this->_args['field_ids']); $i++) {
             $id_of_section = $this->_args['field_ids'][$i];
             $section = array(intval($entry[$id_of_section[0]]),intval($entry[$id_of_section[1]]),intval($entry[$id_of_section[2]]),intval($entry[$id_of_section[3]]));
-            
-            if($this->AGFVhas_duplicates($section)){
-            }else {
-                $result['is_valid'] = false;
-                break;
+
+            $duplicate = $this->find_duplicates($section);
+            if($duplicate !== []){
+                // looping through each id to check it agents the duplicates array.
+                foreach($id_of_section as $id){
+                    //this is getting the value of each field by its id.
+                    $value_of_field = rgpost( 'input_'. $id ); 
+                    if(in_array($value_of_field, $duplicate) ){
+                        // Getting all fields that had duplicates in them and sending error messages.
+                        add_filter( 'gform_field_validation_' . $this->_args['form_id'] . "_" . $id, function($result, $value, $form, $field){
+                            $result["message"] = "Please make sure all values are unique.";
+                            $result["is_valid"] = false;
+                            return $result;
+                        },
+                        10, 4 );
+                    }
+                }
             }
         }
-        return $result;
     }
+    
 }
