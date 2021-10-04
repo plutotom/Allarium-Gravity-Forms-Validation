@@ -12,6 +12,12 @@ Text Domain: Gravity Forms Validation
 */
 
 
+if( !function_exists ( 'add_action' ) ){
+    echo "Hi there! I'm just a plugin not much I can do when called directly.";
+    exit;
+}
+
+
 // Allarium-Gravity-Form-Validation
 class AGFVValidationCheck {
     public function __construct( $args = array() ) {
@@ -23,7 +29,13 @@ class AGFVValidationCheck {
 	}
 
 	public function init() {
-        $this->AGFVvalidationCheck();
+        $entry = GFFormsModel::get_current_lead();
+        if($entry === false){
+            // If the no one is on a form then stops class from running.
+            return false;
+        }else{
+            $this->AGFVvalidationCheck();
+        }
 	}
 
     public function find_duplicates ($input){
@@ -61,3 +73,4 @@ class AGFVValidationCheck {
     }
     
 }
+
