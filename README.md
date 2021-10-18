@@ -13,6 +13,9 @@ This plugin is build to add to the functionality of Gravity Forms. AGF unique va
 * Enter each group of field IDs that should be unique for the field_ids parameter. Each array (group of unique fields) should be an array in an array.
 * Optionaly add a custom error message. `'error_message' => "Please make sure all values are unique."`
 
+![image](https://github.com/plutotom/Allarium-Gravity-Forms-Validation/blob/main/readme_assets/example_error_form.png)
+
+## Code Examples
 ```
 if (class_exists('AGFVValidationCheck')) {
 	new AGFVValidationCheck( array(
