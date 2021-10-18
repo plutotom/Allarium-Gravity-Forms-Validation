@@ -29,12 +29,15 @@ class AGFVValidationCheck {
 	}
 
 	public function init() {
-        $entry = GFFormsModel::get_current_lead();
-        if($entry === false){
-            // If the no one is on a form then stops class from running.
-            return false;
-        }else{
-            $this->AGFVvalidationCheck();
+        // Checks if class is available from Gravity Forms. 
+        if ( class_exists( 'GFCommon' ) ) {
+            $entry = GFFormsModel::get_current_lead();
+            if($entry === false){
+                // If no one is on a form then stops class from running.
+                return false;
+            }else{
+                $this->AGFVvalidationCheck();
+            }
         }
 	}
 
