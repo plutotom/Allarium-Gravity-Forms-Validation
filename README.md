@@ -9,9 +9,9 @@ This plugin is build to add to the functionality of Gravity Forms. AGF unique va
 2. `Edit code in either a snipit plugin or in the functions.php`
 3. Configure the snippet
 
-Enter your form ID for the `form_id` parameter.
-Enter each group of field IDs that should be unique for the field_ids parameter. Each array (group of unique fields) should be an array in an array.
-Optionaly add a custom error message. `'error_message' => "Please make sure all values are unique."`
+* Enter your form ID for the `form_id` parameter.
+* Enter each group of field IDs that should be unique for the field_ids parameter. Each array (group of unique fields) should be an array in an array.
+* Optionaly add a custom error message. `'error_message' => "Please make sure all values are unique."`
 
 ```
 if (class_exists('AGFVValidationCheck')) {
