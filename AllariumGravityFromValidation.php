@@ -24,6 +24,7 @@ class AGFVValidationCheck {
 		$this->_args = wp_parse_args( $args, array(
 			'form_id'             => false,
 			'field_ids'           => false,
+            'error_message'       => "Please make sure all values are unique."
             		) );      
 		add_action( 'init', array( $this, 'init' ) );
 	}
@@ -64,7 +65,7 @@ class AGFVValidationCheck {
                     if(in_array($value_of_field, $duplicate) ){
                         // Getting all fields that had duplicates in them and sending error messages.
                         add_filter( 'gform_field_validation_' . $this->_args['form_id'] . "_" . $id, function($result, $value, $form, $field){
-                            $result["message"] = "Please make sure all values are unique.";
+                            $result["message"] = $this->_args['error_message'];
                             $result["is_valid"] = false;
                             return $result;
                         },
