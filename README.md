@@ -7,13 +7,28 @@ This plugin is build to add to the functionality of Gravity Forms. AGF unique va
 
 1. `Install plugin on WordPress`
 2. `Edit code in either a snipit plugin or in the functions.php`
+3. Configure the snippet
+
+Enter your form ID for the `form_id` parameter.
+Enter each group of field IDs that should be unique for the field_ids parameter. Each array (group of unique fields) should be an array in an array.
+
 ```
 if (class_exists('AGFVValidationCheck')) {
 	new AGFVValidationCheck( array(
 		'form_id' => 36,
-		'field_ids' => array(array(40, 41, 42, 43), array(47, 48, 49, 50), array(51,52,53,54))
+		'field_ids' => array(array(40, 41, 42, 43), array(47, 48, 49, 50), array(51, 52 ,53 ,54))
 	 ));
 }
+```
+```
+$group_one = array(6, 7, 9, 10);
+$group_two = array(12, 13, 14, 15);
+$group_three = array(17, 18, 19, 20);
+
+new AGFVValidationCheck( array(
+	'form_id' => 1,
+	'field_ids' => array($group_one, $group_two, $group_three)
+ ) );
 ```
 
 
