@@ -11,7 +11,7 @@ This plugin is build to add to the functionality of Gravity Forms. AGF unique va
 if (class_exists('AGFVValidationCheck')) {
 	new AGFVValidationCheck( array(
 		'form_id' => 36,
-		'field_ids' => [array(40, 41, 42, 43), array(47, 48, 49, 50), array(51,52,53,54)]
+		'field_ids' => array(array(40, 41, 42, 43), array(47, 48, 49, 50), array(51,52,53,54))
 	 ));
 }
 ```
